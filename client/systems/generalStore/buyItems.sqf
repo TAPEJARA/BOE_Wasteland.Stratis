@@ -1,5 +1,4 @@
 // ******************************************************************************************
-// ******************************************************************************************
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Version: 1.0
@@ -14,7 +13,6 @@ if (!isNil "storePurchaseHandle" && {typeName storePurchaseHandle == "SCRIPT"} &
 
 #define PURCHASED_CRATE_TYPE_AMMO 60
 #define PURCHASED_CRATE_TYPE_WEAPON 61
-#define CEIL_PRICE(PRICE) (ceil ((PRICE) / 5) * 5)
 
 storePurchaseHandle = _this spawn
 {
@@ -126,8 +124,7 @@ storePurchaseHandle = _this spawn
 
 				if (_x select 3 == "vest") then
 				{
-					([_class, "Chest"] call fn_getItemArmor) params ["_ballArmor", "_explArmor"];
- +					_price = CEIL_PRICE(([_class] call getCapacity) / 2 + _ballArmor*3 + _explArmor*2); // price formula also defined in getItemInfo.sqf
+					_price = [_class] call getCapacity;
 				}
 				else
 				{
